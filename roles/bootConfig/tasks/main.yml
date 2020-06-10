@@ -1,0 +1,17 @@
+- name: Update boot config
+  become: yes
+  blockinfile:
+    path: /boot/config.txt
+    block: |
+      dtparam=audio=off
+      hdmi_blanking=2
+      dtparam=act_led_trigger=none
+      dtparam=act_led_activelow=off
+      dtparam=pwr_led_trigger=none
+      dtparam=pwr_led_activelow=off
+      dtparam=eth_led0=4
+      dtparam=eth_led1=4
+      dtoverlay=disable-bt
+      dtoverlay=disable-wifi
+      dtoverlay=dwc2
+      gpu_mem_1024=16

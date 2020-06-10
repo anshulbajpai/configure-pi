@@ -3,5 +3,6 @@
   gather_facts: false
   remote_user: ansible
   roles:
+    - bootConfig
     - ufw
     - fail2ban

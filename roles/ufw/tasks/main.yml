@@ -3,8 +3,8 @@
   apt:
     name: ufw
     state: present
-    update_cache: true
-    force_apt_get: true
+    update_cache: yes
+    force_apt_get: yes
 - name: ufw deny default in 
   become: yes
   ufw:
