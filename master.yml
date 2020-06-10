@@ -2,12 +2,6 @@
 - hosts: pi
   gather_facts: false
   remote_user: ansible
-  become: true
-  tasks:
-    - name: install packages
-      apt:
-        name: ufw
-        state: present
-        update_cache: true
-    - import_role:
-        name: ufw
+  roles:
+    - ufw
+    - fail2ban

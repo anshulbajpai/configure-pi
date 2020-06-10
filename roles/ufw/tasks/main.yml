@@ -1,19 +1,30 @@
+- name: install ufw
+  become: yes
+  apt:
+    name: ufw
+    state: present
+    update_cache: true
+    force_apt_get: true
 - name: ufw deny default in 
+  become: yes
   ufw:
     default: deny
     direction: incoming
 - name: allow ssh in 
+  become: yes
   ufw:
     rule: allow
     direction: in
     proto: tcp
     port: '22'
 - name: limit ssh in 
+  become: yes
   ufw:
     rule: limit
     direction: in
     proto: tcp
     port: '22'
 - name: enable ufw 
+  become: yes
   ufw:
     state: enabled

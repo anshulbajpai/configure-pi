@@ -1,1 +1,1 @@
-ansible-playbook -i hosts master.yml $@
+ansible-playbook -i hosts master.yml "$@"
