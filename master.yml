@@ -9,22 +9,5 @@
         name: ufw
         state: present
         update_cache: true
-    - name: ufw deny default in 
-      ufw:
-        default: deny
-        direction: incoming
-    - name: allow ssh in 
-      ufw:
-        rule: allow
-        direction: in
-        proto: tcp
-        port: '22'
-    - name: limit ssh in 
-      ufw:
-        rule: limit
-        direction: in
-        proto: tcp
-        port: '22'
-    - name: enable ufw 
-      ufw:
-        state: enabled
+    - import_role:
+        name: ufw
