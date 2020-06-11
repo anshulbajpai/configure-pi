@@ -1,2 +1,2 @@
 [pi]
-pi.local
+pi.local ansible_python_interpreter=/usr/bin/python3

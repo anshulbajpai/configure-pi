@@ -3,8 +3,9 @@
   gather_facts: false
   remote_user: ansible
   roles:
-    - ufw
-    - fail2ban
-    - bootConfig
-    - hdd
-    - installDocker
+     - ufw
+     - fail2ban
+     - bootConfig
+     - hdd
+     - installDocker
+          
