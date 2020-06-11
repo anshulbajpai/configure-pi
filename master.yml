@@ -9,3 +9,4 @@
      - bootConfig
      - hdd
      - installDocker
+     - portainer

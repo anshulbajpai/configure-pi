@@ -1,0 +1,22 @@
+- name: "Create portainer docker volume"
+  docker_volume:
+    name: portainer_data
+
+- name: "Start portainer"
+  docker_container:
+    name: portainer
+    image: portainer/portainer
+    published_ports: 
+      - '9000:9000'
+    restart_policy: unless-stopped
+    restart: yes
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data portainer/portainer
+
+- name: allow 9000 in 
+  ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: '9000'
