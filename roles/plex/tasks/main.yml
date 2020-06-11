@@ -1,0 +1,52 @@
+- name: Create plex group
+  group:
+    name: plex
+    gid: '2222'
+
+- name: Create plex user
+  user:
+    append: yes
+    group: plex
+    groups:
+      - hdd
+    system: yes  
+    name: plex
+    password_lock: yes
+    create_home: false
+    shell: ''
+  register: plex_user
+
+- name: Create plex config directory 
+  file:
+    path: /data/plex/config
+    state: directory
+    owner: plex
+    group: plex
+    mode: '770'
+
+- name: Start plex
+  docker_container:
+    name: plex
+    image: linuxserver/plex:arm32v7-latest
+    network_mode: host
+    restart_policy: unless-stopped
+    restart: yes
+    volumes: 
+      - /data/plex/config:/config
+      - /mnt/hdd/Movies:/movies
+      - /mnt/hdd/Tv:/tv
+      - /mnt/hdd/Pictures:/pictures
+    env:
+      PLEX_CLAIM: "{{ plex_claim }}"
+      TZ: Europe/London
+      PGID: "{{ plex_user.group }}"
+      PUID: "{{ plex_user.uid }}"
+      UMASK_SET: "022"
+      VERSION: docker
+
+- name: allow 32400 in 
+  ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: '32400'

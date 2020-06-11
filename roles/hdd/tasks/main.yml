@@ -9,11 +9,6 @@
     append: yes
     groups: hdd
     
-- name: Create mount directory 
-  file:
-    path: /mnt/hdd
-    state: directory
-
 - name: Mount HDD on boot
   lineinfile:
     path: /etc/fstab

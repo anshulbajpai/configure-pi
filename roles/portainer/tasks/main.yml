@@ -12,7 +12,7 @@
     restart: yes
     volumes: 
       - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data portainer/portainer
+      - portainer_data:/data
 
 - name: allow 9000 in 
   ufw:

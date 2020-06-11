@@ -3,6 +3,10 @@
   gather_facts: false
   remote_user: ansible
   become: yes
+  vars_prompt:
+    - name: plex_claim
+      prompt: "Enter plex claim. Obtain it from https://www.plex.tv/claim"
+      default: ""
   roles:
      - ufw
      - fail2ban
@@ -10,3 +14,4 @@
      - hdd
      - installDocker
      - portainer
+     - plex
