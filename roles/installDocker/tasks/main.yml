@@ -12,28 +12,3 @@
     name: ansible
     append: yes
     groups: docker
-
-- name: Add packages for docker compose
-  apt:
-    pkg: 
-      - libffi-dev
-      - libssl-dev
-      - python3
-      - python3-pip
-    state: present
-    update_cache: yes
-    force_apt_get: yes
-
-- name: Remove packages for docker compose
-  apt:
-    name: python-configparser 
-    autoclean: yes
-    autoremove: yes
-    state: absent
-    force_apt_get: yes
-
-- name: Install docker compose
-  pip: 
-    name: docker-compose
-    executable: pip3
-    
