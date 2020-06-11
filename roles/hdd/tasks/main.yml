@@ -19,3 +19,52 @@
     path: /etc/fstab
     backup: yes
     line: UUID=F114-D4AE /mnt/hdd vfat defaults,auto,noatime,noexec,users,gid=1111,umask=0002,rw,nofail,x-systemd.device-timeout=30 0 0
+
+- name: Install hd-idle compilation tools
+  apt:
+    pkg:
+      - build-essential
+      - fakeroot
+      - debhelper
+    state: present
+    update_cache: yes
+    force_apt_get: yes
+
+- name: Create hd-idle directory 
+  file:
+    path: /etc/hd-idle
+    state: directory
+
+- name: Download and extract hd-idle
+  unarchive:
+    remote_src: yes
+    src: http://sourceforge.net/projects/hd-idle/files/hd-idle-1.05.tgz
+    dest: /etc/hd-idle
+
+- name: Build hd-idle deb package
+  ignore_errors: yes
+  shell:
+    chdir: /etc/hd-idle/hd-idle
+    cmd: dpkg-buildpackage -rfakeroot
+    
+- name: Install hd-idle deb package
+  shell:
+    chdir: /etc/hd-idle
+    cmd: dpkg -i hd-idle_*.deb
+    
+- name: Ensure hd-idle is enabled
+  lineinfile:
+    path: /etc/default/hd-idle
+    regexp: '^START_HD_IDLE='
+    line: START_HD_IDLE=true
+
+- name: Configure hd-idle
+  lineinfile:
+    path: /etc/default/hd-idle
+    backup: yes
+    line: HD_IDLE_OPTS="-i 600 -a sda1 -i 300 -l /var/log/hd-idle.log"
+
+- name: Restart hd-idle
+  service:
+    name: hd-idle
+    state: restarted    
