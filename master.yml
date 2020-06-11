@@ -2,10 +2,10 @@
 - hosts: pi
   gather_facts: false
   remote_user: ansible
+  become: yes
   roles:
      - ufw
      - fail2ban
      - bootConfig
      - hdd
      - installDocker
-          

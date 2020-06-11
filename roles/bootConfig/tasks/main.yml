@@ -1,5 +1,4 @@
 - name: Update boot config
-  become: yes
   blockinfile:
     path: /boot/config.txt
     block: |

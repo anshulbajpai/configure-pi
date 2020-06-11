@@ -1,12 +1,10 @@
 - name: install fail2ban
-  become: yes
   apt:
     name: fail2ban
     state: present
     update_cache: true
     force_apt_get: true
 - name: copy jail local
-  become: yes
   copy:
     src: /etc/fail2ban/jail.conf
     dest: /etc/fail2ban/jail.local    

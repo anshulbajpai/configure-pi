@@ -1,24 +1,20 @@
 - name: Create hdd group
-  become: yes
   group:
     name: hdd
     gid: '1111'
 
 - name: Add pikachu to hdd group
-  become: yes
   user:
     name: pikachu
     append: yes
     groups: hdd
     
 - name: Create mount directory 
-  become: yes
   file:
     path: /mnt/hdd
     state: directory
 
 - name: Mount HDD on boot
-  become: yes
   lineinfile:
     path: /etc/fstab
     backup: yes
