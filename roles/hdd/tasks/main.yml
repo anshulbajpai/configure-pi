@@ -1,0 +1,25 @@
+- name: Create hdd group
+  become: yes
+  group:
+    name: hdd
+    gid: '1111'
+
+- name: Added pikachu to hdd group
+  become: yes
+  user:
+    name: pikachu
+    append: yes
+    groups: hdd
+    
+- name: Create mount directory 
+  become: yes
+  file:
+    path: /mnt/hdd
+    state: directory
+
+- name: Mount HDD on boot
+  become: yes
+  lineinfile:
+    path: /etc/fstab
+    backup: yes
+    line: UUID=F114-D4AE /mnt/hdd vfat defaults,auto,noatime,noexec,users,gid=1111,umask=0002,rw,nofail,x-systemd.device-timeout=30 0 0
