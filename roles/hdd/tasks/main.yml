@@ -4,7 +4,7 @@
     name: hdd
     gid: '1111'
 
-- name: Added pikachu to hdd group
+- name: Add pikachu to hdd group
   become: yes
   user:
     name: pikachu
