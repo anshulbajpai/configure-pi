@@ -12,3 +12,7 @@
     name: ansible
     append: yes
     groups: docker
+
+- name: Create a network for traefik
+  docker_network:
+    name: proxy
