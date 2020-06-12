@@ -1,3 +1,7 @@
+- name: Create a network for traefik
+  docker_network:
+    name: proxy
+
 - name: Start traefik
   docker_container:
     name: traefik

@@ -13,6 +13,7 @@
      - bootConfig
      - hdd
      - installDocker
+     - traefik
      - portainer
      - plex
-     - traefik
+     
