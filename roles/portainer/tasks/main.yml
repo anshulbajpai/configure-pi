@@ -6,8 +6,6 @@
   docker_container:
     name: portainer
     image: portainer/portainer
-    published_ports: 
-      - '9000:9000'
     restart_policy: unless-stopped
     restart: yes
     volumes: 
@@ -24,10 +22,3 @@
       traefik.docker.network: proxy
       traefik.http.middlewares.portainer-strip-prefix.stripprefix.prefixes: "/portainer"
       traefik.http.routers.portainer.middlewares: "portainer-strip-prefix"
-
-- name: allow 9000 in 
-  ufw:
-    rule: allow
-    direction: in
-    proto: tcp
-    port: '9000'
