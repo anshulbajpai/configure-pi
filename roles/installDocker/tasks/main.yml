@@ -13,3 +13,9 @@
     append: yes
     groups: docker
 
+- name: Create data directory 
+  file:
+    path: /data
+    state: directory
+    mode: '775'
+

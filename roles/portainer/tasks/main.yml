@@ -8,17 +8,27 @@
     image: portainer/portainer
     restart_policy: unless-stopped
     restart: yes
+    published_ports: 
+      - '9000:9000'
     volumes: 
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - portainer_data:/data
-    network_mode: proxy
-    networks:
-      - name: proxy
-    networks_cli_compatible: yes
-    labels:
-      traefik.enable: "true"
-      traefik.http.routers.portainer.rule: "PathPrefix(`/portainer`) || HeadersRegexp(`Referer`, `/portainer`) || HeadersRegexp(`Referer`, `/vendor`)"
-      traefik.http.routers.portainer.entrypoints: web
-      traefik.docker.network: proxy
-      traefik.http.middlewares.portainer-strip-prefix.stripprefix.prefixes: "/portainer"
-      traefik.http.routers.portainer.middlewares: "portainer-strip-prefix"
+    # # network_mode: proxy
+    # # networks:
+    # #   - name: proxy
+    # # networks_cli_compatible: yes
+    # labels:
+    #   traefik.enable: "true"
+    #   traefik.http.routers.portainer.rule: "PathPrefix(`/portainer`) || HeadersRegexp(`Referer`, `/portainer`) || HeadersRegexp(`Referer`, `/vendor`)"
+    #   traefik.http.routers.portainer.entrypoints: http
+    #   traefik.docker.network: proxy
+    #   traefik.http.middlewares.portainer-strip-prefix.stripprefix.prefixes: "/portainer"
+    #   traefik.http.routers.portainer.middlewares: "portainer-strip-prefix"
+
+- name: allow 9000 tcp in 
+  ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: '9000'      
+

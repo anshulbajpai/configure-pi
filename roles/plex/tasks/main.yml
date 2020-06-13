@@ -38,7 +38,7 @@
       - /mnt/hdd/Pictures:/pictures
     env:
       PLEX_CLAIM: "{{ plex_claim }}"
-      TZ: Europe/London
+      TZ: 'Europe/London'
       PGID: "{{ plex_user.group }}"
       PUID: "{{ plex_user.uid }}"
       UMASK_SET: "022"
@@ -50,3 +50,5 @@
     direction: in
     proto: tcp
     port: '32400'
+
+#enable all ports and then try to disable host network mode

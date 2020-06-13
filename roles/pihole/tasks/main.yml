@@ -1,0 +1,77 @@
+- name: Create pihole etc directory
+  file:
+    path: /data/pihole/etc-pihole
+    state: directory
+
+- name: Create pihole dnsmasqd directory
+  file:
+    path: /data/pihole/etc-dnsmasqd
+    state: directory
+
+- name: Start pihole
+  docker_container:
+    name: pihole
+    hostname: pihole
+    # domainname: local
+    image: pihole/pihole:latest
+    published_ports: 
+      - '53:53/tcp'
+      - '53:53/udp'
+      - '80:80/tcp'
+      - '443:443/tcp'
+    restart_policy: unless-stopped
+    restart: yes
+    # network_mode: proxy
+    # networks:
+    #   - name: proxy
+    # networks_cli_compatible: yes      
+    volumes: 
+      - /data/pihole/etc-pihole/:/etc/pihole/
+      - /data/pihole/etc-dnsmasqd/:/etc/dnsmasq.d/
+    dns_servers:
+      - '127.0.0.1'
+      - '103.86.96.100'
+    env:
+      TZ: 'Europe/London'  
+      DNS1: '103.86.96.100'
+      DNS2: '103.86.99.100'
+      DNSSEC: 'true'
+      DNS_BOGUS_PRIV: 'false'
+      DNS_FQDN_REQUIRED: 'true'
+      CONDITIONAL_FORWARDING: 'true'
+      CONDITIONAL_FORWARDING_IP: '192.168.1.1'
+      CONDITIONAL_FORWARDING_DOMAIN: 'local'
+    # labels:
+    #   traefik.enable: "true"
+    #   traefik.http.routers.pihole.rule: "Host(`pihole.local`)"
+    #   traefik.http.routers.pihole.entrypoints: http
+    #   traefik.docker.network: proxy
+    #   traefik.http.services.pihole.loadbalancer.server.port: '80'
+
+- name: allow 53 tcp in 
+  ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: '53'      
+
+- name: allow 53 udp in 
+  ufw:
+    rule: allow
+    direction: in
+    proto: udp
+    port: '53'      
+
+- name: allow 80 tcp in 
+  ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: '80'      
+    
+- name: allow 443 tcp in 
+  ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: '443'      

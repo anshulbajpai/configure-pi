@@ -5,8 +5,14 @@
 - name: Start traefik
   docker_container:
     name: traefik
+    domainname: local
     image: traefik:v2.2
-    command: --api.insecure=true --providers.docker=true --providers.docker.exposedbydefault=false --entrypoints.web.address=:80
+    command: 
+      - --providers.docker=true
+      - --providers.docker.network=proxy
+      - --providers.docker.exposedbydefault=false
+      - --api.insecure=true
+      - --entrypoints.http.address=:80
     published_ports: 
       - '8080:8080'
       - '80:80'
@@ -17,7 +23,10 @@
       - name: proxy
     networks_cli_compatible: yes      
     volumes: 
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    dns_servers:
+      - '192.168.1.164'
+      - '1.1.1.1'
 
 - name: allow 8080 in 
   ufw:
