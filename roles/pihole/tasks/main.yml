@@ -12,7 +12,6 @@
   docker_container:
     name: pihole
     hostname: pihole
-    # domainname: local
     image: pihole/pihole:latest
     published_ports: 
       - '53:53/tcp'
@@ -21,10 +20,6 @@
       - '443:443/tcp'
     restart_policy: unless-stopped
     restart: yes
-    # network_mode: proxy
-    # networks:
-    #   - name: proxy
-    # networks_cli_compatible: yes      
     volumes: 
       - /data/pihole/etc-pihole/:/etc/pihole/
       - /data/pihole/etc-dnsmasqd/:/etc/dnsmasq.d/
@@ -41,12 +36,6 @@
       CONDITIONAL_FORWARDING: 'true'
       CONDITIONAL_FORWARDING_IP: '192.168.1.1'
       CONDITIONAL_FORWARDING_DOMAIN: 'local'
-    # labels:
-    #   traefik.enable: "true"
-    #   traefik.http.routers.pihole.rule: "Host(`pihole.local`)"
-    #   traefik.http.routers.pihole.entrypoints: http
-    #   traefik.docker.network: proxy
-    #   traefik.http.services.pihole.loadbalancer.server.port: '80'
 
 - name: allow 53 tcp in 
   ufw:

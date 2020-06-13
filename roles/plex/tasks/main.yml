@@ -50,5 +50,3 @@
     direction: in
     proto: tcp
     port: '32400'
-
-#enable all ports and then try to disable host network mode
