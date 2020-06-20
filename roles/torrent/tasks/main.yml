@@ -1,0 +1,87 @@
+- name: Create qbittorrent user
+  user:
+    append: yes
+    group: hdd
+    system: yes  
+    name: qbittorrent
+    password_lock: yes
+    create_home: false
+    shell: ''
+  register: qbittorrent_user
+
+- name: Create qbittorrent downloads directory
+  file:
+    path: /data/qbittorrent/downloads
+    state: directory
+    owner: qbittorrent
+    group: hdd
+    mode: '700'
+    recurse: yes
+
+- name: Create qbittorrent config directory 
+  file:
+    path: /data/qbittorrent/config
+    state: directory
+    owner: qbittorrent
+    group: hdd
+    mode: '700'
+    recurse: yes
+
+- name: Create qbittorrent hook directory 
+  file:
+    path: /data/qbittorrent/hook
+    state: directory
+    owner: qbittorrent
+    group: hdd
+    mode: '700'
+    recurse: yes
+
+- name: Copy move downloads script
+  copy:
+    src: ../files/moveDownloads.sh
+    dest: /data/qbittorrent/hook/moveDownloads.sh
+    owner: qbittorrent
+    group: hdd
+    mode: '700'    
+
+- name: Start qbittorrent
+  docker_container:
+    name: qbittorrent
+    image: linuxserver/qbittorrent
+    restart_policy: unless-stopped
+    restart: yes
+    published_ports: 
+      - '6881:6881'
+      - '6881:6881/udp'
+      - '8080:8080'
+    volumes: 
+      - /data/qbittorrent/config:/config
+      - /data/qbittorrent/downloads:/downloads
+      - /data/qbittorrent/hook:/hook
+      - /mnt/hdd/Movies:/movies
+      - /mnt/hdd/Tv:/tv
+    env:
+      TZ: 'Europe/London'
+      PGID: "{{ qbittorrent_user.group }}"
+      PUID: "{{ qbittorrent_user.uid }}"
+
+- name: allow 8080 tcp in 
+  ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: '8080'      
+
+- name: allow 6881 tcp in 
+  ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: '6881'      
+
+- name: allow 6881 udp in 
+  ufw:
+    rule: allow
+    direction: in
+    proto: udp
+    port: '6881'      
