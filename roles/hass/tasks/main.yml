@@ -3,6 +3,16 @@
     path: /data/hass/config
     state: directory
 
+- name: Copy hass configuration
+  copy:
+    src: ../files/configuration.yaml
+    dest: /data/hass/config/configuration.yaml
+
+- name: Copy hass lovelace configuration
+  copy:
+    src: ../files/lovelace-default.yaml
+    dest: /data/hass/config/lovelace-default.yaml
+
 - name: Start hass
   docker_container:
     name: hass
