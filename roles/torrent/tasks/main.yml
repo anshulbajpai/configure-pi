@@ -42,7 +42,55 @@
     dest: /data/qbittorrent/hook/moveDownloads.sh
     owner: qbittorrent
     group: hdd
-    mode: '700'    
+    mode: '700'
+
+- name: Download and extract qbittorrent src
+  unarchive:
+    remote_src: yes
+    src: https://github.com/qbittorrent/qBittorrent/archive/master.zip
+    dest: /data/qbittorrent/webui
+
+- name: copy qbittorrent webui src to www
+  copy:
+    src: /data/qbittorrent/webui/qBittorrent-master/src/webui/www
+    dest: /data/qbittorrent/webui    
+    remote_src: true    
+
+- name: copy qbittorrent icons src to www/public
+  copy:
+    src: /data/qbittorrent/webui/qBittorrent-master/src/icons
+    dest: /data/qbittorrent/webui/www/public
+    remote_src: true    
+
+- name: copy qbittorrent icons src to www/private
+  copy:
+    src: /data/qbittorrent/webui/qBittorrent-master/src/icons
+    dest: /data/qbittorrent/webui/www/private    
+    remote_src: true    
+
+- name: Download dark qbittorrent css to public css
+  get_url:
+    url: https://raw.githubusercontent.com/iFelix18/Dark-qBittorrent-WebUI/master/dark-qbittorrent-webui.css
+    dest: /data/qbittorrent/webui/www/public/css
+
+- name: Download dark qbittorrent css to private css
+  get_url:
+    url: https://raw.githubusercontent.com/iFelix18/Dark-qBittorrent-WebUI/master/dark-qbittorrent-webui.css
+    dest: /data/qbittorrent/webui/www/private/css
+
+- name: inclue dark qbittorrent css in public index.html
+  lineinfile:
+    path: /data/qbittorrent/webui/www/public/index.html
+    insertafter: 'login.css'
+    firstmatch: true
+    line: '<link rel="stylesheet" type="text/css" href="css/dark-qbittorrent-webui.css?v=${VERSION}" \>'
+
+- name: inclue dark qbittorrent css in private index.html
+  lineinfile:
+    path: /data/qbittorrent/webui/www/private/index.html
+    insertafter: 'Tabs.css'
+    firstmatch: true
+    line: '<link rel="stylesheet" type="text/css" href="css/dark-qbittorrent-webui.css?v=${VERSION}" \>'
 
 - name: Start qbittorrent
   docker_container:
@@ -58,6 +106,7 @@
       - /data/qbittorrent/config:/config
       - /data/qbittorrent/downloads:/downloads
       - /data/qbittorrent/hook:/hook
+      - /data/qbittorrent/webui:/webui
       - /mnt/hdd/Movies:/movies
       - /mnt/hdd/Tv:/tv
     env:
@@ -84,4 +133,4 @@
     rule: allow
     direction: in
     proto: udp
-    port: '6881'      
+    port: '6881'
