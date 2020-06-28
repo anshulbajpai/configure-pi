@@ -20,7 +20,7 @@ lovelace:
   dashboards:
     lovelace-default:
       mode: yaml
-      filename: lovelace-default.yaml
+      filename: home-dashboard.yaml
       title: Home
       icon: mdi:desktop-mac-dashboard
       show_in_sidebar: true

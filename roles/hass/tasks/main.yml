@@ -10,8 +10,8 @@
 
 - name: Copy hass lovelace configuration
   copy:
-    src: ../files/lovelace-default.yaml
-    dest: /data/hass/config/lovelace-default.yaml
+    src: ../files/home-dashboard.yaml
+    dest: /data/hass/config/home-dashboard.yaml
 
 - name: Start hass
   docker_container:
