@@ -1,0 +1,6 @@
+- name: Cron reboot raspberry pi
+  cron:
+    name: "reboot"
+    minute: "0"
+    hour: "6"
+    job: "reboot"

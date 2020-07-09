@@ -9,6 +9,7 @@
      - fail2ban
      - bootConfig
      - hdd
+     - reboot
      - installDocker
      - portainer
      - pihole
