@@ -3,4 +3,4 @@
     name: "reboot"
     minute: "0"
     hour: "6"
-    job: "reboot"
+    job: "sudo reboot"
