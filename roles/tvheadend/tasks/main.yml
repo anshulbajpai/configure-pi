@@ -1,0 +1,59 @@
+- name: Create tvheadend group
+  group:
+    name: tvheadend
+
+- name: Create tvheadend user
+  user:
+    append: yes
+    group: tvheadend
+    system: yes  
+    name: tvheadend
+    password_lock: yes
+    create_home: false
+    shell: ''
+  register: tvheadend_user
+
+- name: Create tvheadend config directory 
+  file:
+    path: /data/tvheadend/config
+    state: directory
+    owner: tvheadend
+    group: tvheadend
+    mode: '700'
+
+- name: Create tvheadend recordings directory 
+  file:
+    path: /data/tvheadend/recordings
+    state: directory
+    owner: tvheadend
+    group: tvheadend
+    mode: '700'
+
+- name: Start tvheadend
+  docker_container:
+    name: tvheadend
+    image: linuxserver/tvheadend:arm32v7-latest
+    network_mode: host
+    restart_policy: unless-stopped
+    restart: yes
+    volumes: 
+      - /data/tvheadend/config:/config
+      - /data/tvheadend/recordings:/recordings
+    env:
+      TZ: 'Europe/London'
+      PGID: "{{ tvheadend_user.group }}"
+      PUID: "{{ tvheadend_user.uid }}"
+
+- name: allow 9981 in 
+  ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: '9981'
+
+- name: allow 9982 in 
+  ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: '9982'
