@@ -98,6 +98,8 @@
     image: linuxserver/qbittorrent
     restart_policy: unless-stopped
     restart: yes
+    memory: 512M
+    cpu_shares: 256
     published_ports: 
       - '6881:6881'
       - '6881:6881/udp'

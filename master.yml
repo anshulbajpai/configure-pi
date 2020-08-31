@@ -15,5 +15,5 @@
      - pihole
      - plex
      - torrent
-     - hass
+    #  - hass
     #  - tvheadend

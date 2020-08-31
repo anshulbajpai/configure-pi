@@ -31,6 +31,8 @@
     network_mode: host
     restart_policy: unless-stopped
     restart: yes
+    memory: 256M
+    cpu_shares: 512
     volumes: 
       - /data/plex/config:/config
       - /mnt/hdd/Movies:/movies
