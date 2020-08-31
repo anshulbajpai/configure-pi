@@ -10,6 +10,7 @@
     restart: yes
     memory: 32M
     cpu_shares: 128
+    cpuset_cpus: "3"
     published_ports: 
       - '9000:9000'
     volumes: 

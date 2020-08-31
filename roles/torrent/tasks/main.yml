@@ -99,7 +99,8 @@
     restart_policy: unless-stopped
     restart: yes
     memory: 512M
-    cpu_shares: 256
+    cpuset_cpus: "3"
+    cpu_shares: 512
     published_ports: 
       - '6881:6881'
       - '6881:6881/udp'

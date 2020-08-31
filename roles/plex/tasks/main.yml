@@ -32,6 +32,7 @@
     restart_policy: unless-stopped
     restart: yes
     memory: 256M
+    cpuset_cpus: "0-2"
     cpu_shares: 512
     volumes: 
       - /data/plex/config:/config
