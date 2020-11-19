@@ -6,14 +6,14 @@
   ansible.builtin.user:
     append: yes
     group: tvheadend
-    system: yes  
+    system: yes
     name: tvheadend
     password_lock: yes
     create_home: false
     shell: ''
   register: tvheadend_user
 
-- name: Create tvheadend config directory 
+- name: Create tvheadend config directory
   ansible.builtin.file:
     path: /data/tvheadend/config
     state: directory
@@ -21,7 +21,7 @@
     group: tvheadend
     mode: '700'
 
-- name: Create tvheadend recordings directory 
+- name: Create tvheadend recordings directory
   ansible.builtin.file:
     path: /data/tvheadend/recordings
     state: directory
@@ -36,7 +36,7 @@
     network_mode: host
     restart_policy: unless-stopped
     restart: yes
-    volumes: 
+    volumes:
       - /data/tvheadend/config:/config
       - /data/tvheadend/recordings:/recordings
     env:
@@ -44,14 +44,14 @@
       PGID: "{{ tvheadend_user.group }}"
       PUID: "{{ tvheadend_user.uid }}"
 
-- name: allow 9981 in 
+- name: allow 9981 in
   community.general.ufw:
     rule: allow
     direction: in
     proto: tcp
     port: '9981'
 
-- name: allow 9982 in 
+- name: allow 9982 in
   community.general.ufw:
     rule: allow
     direction: in

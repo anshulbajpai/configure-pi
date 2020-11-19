@@ -19,15 +19,15 @@
     image: homeassistant/raspberrypi4-homeassistant:stable
     restart_policy: unless-stopped
     restart: yes
-    network_mode: host    
-    volumes: 
+    network_mode: host
+    volumes:
       - /data/hass/config:/config
     env:
       TZ: 'Europe/London'
 
-- name: allow 8123 tcp in 
+- name: allow 8123 tcp in
   community.general.ufw:
     rule: allow
     direction: in
     proto: tcp
-    port: '8123'      
+    port: '8123'
