@@ -1,5 +1,5 @@
 - name: Update boot config
-  blockinfile:
+  ansible.builtin.blockinfile:
     path: /boot/config.txt
     block: |
       dtparam=audio=off

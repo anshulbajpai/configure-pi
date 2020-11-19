@@ -1,23 +1,23 @@
 - name: Create plex group
-  group:
+  ansible.builtin.group:
     name: plex
     gid: '2222'
 
 - name: Create plex user
-  user:
+  ansible.builtin.user:
     append: yes
     group: plex
     groups:
       - hdd
-    system: yes  
+    system: yes
     name: plex
     password_lock: yes
     create_home: false
     shell: ''
   register: plex_user
 
-- name: Create plex config directory 
-  file:
+- name: Create plex config directory
+  ansible.builtin.file:
     path: /data/plex/config
     state: directory
     owner: plex
@@ -25,7 +25,7 @@
     mode: '770'
 
 - name: Start plex
-  docker_container:
+  community.general.docker_container:
     name: plex
     image: linuxserver/plex:arm32v7-latest
     network_mode: host
@@ -34,7 +34,7 @@
     memory: 256M
     cpuset_cpus: "0-2"
     cpu_shares: 512
-    volumes: 
+    volumes:
       - /data/plex/config:/config
       - /mnt/hdd/Movies:/movies
       - /mnt/hdd/Tv:/tv
@@ -47,8 +47,8 @@
       UMASK_SET: "022"
       VERSION: docker
 
-- name: allow 32400 in 
-  ufw:
+- name: allow 32400 in
+  community.general.ufw:
     rule: allow
     direction: in
     proto: tcp

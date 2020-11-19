@@ -1,9 +1,9 @@
 - name: Create tvheadend group
-  group:
+  ansible.builtin.group:
     name: tvheadend
 
 - name: Create tvheadend user
-  user:
+  ansible.builtin.user:
     append: yes
     group: tvheadend
     system: yes  
@@ -14,7 +14,7 @@
   register: tvheadend_user
 
 - name: Create tvheadend config directory 
-  file:
+  ansible.builtin.file:
     path: /data/tvheadend/config
     state: directory
     owner: tvheadend
@@ -22,7 +22,7 @@
     mode: '700'
 
 - name: Create tvheadend recordings directory 
-  file:
+  ansible.builtin.file:
     path: /data/tvheadend/recordings
     state: directory
     owner: tvheadend
@@ -30,7 +30,7 @@
     mode: '700'
 
 - name: Start tvheadend
-  docker_container:
+  community.general.docker_container:
     name: tvheadend
     image: linuxserver/tvheadend:arm32v7-latest
     network_mode: host
@@ -45,14 +45,14 @@
       PUID: "{{ tvheadend_user.uid }}"
 
 - name: allow 9981 in 
-  ufw:
+  community.general.ufw:
     rule: allow
     direction: in
     proto: tcp
     port: '9981'
 
 - name: allow 9982 in 
-  ufw:
+  community.general.ufw:
     rule: allow
     direction: in
     proto: tcp

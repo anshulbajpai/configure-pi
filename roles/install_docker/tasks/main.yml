@@ -1,27 +1,28 @@
 - name: Ensure docker memory limit is enabled
-  lineinfile:
+  ansible.builtin.lineinfile:
     backrefs: yes
     path: /boot/cmdline.txt
     regexp: '(.*?)( cgroup_enable=memory swapaccount=1)* rootwait'
     line: '\1 cgroup_enable=memory swapaccount=1 rootwait'
 
 - name: Install docker
-  shell:  curl -sSL https://get.docker.com | sh
+  # FQCN not working here.
+  shell: curl -sSL https://get.docker.com | sh
 
 - name: Add pikachu to docker group
-  user:
+  ansible.builtin.user:
     name: pikachu
     append: yes
     groups: docker
 
 - name: Add ansible to docker group
-  user:
+  ansible.builtin.user:
     name: ansible
     append: yes
     groups: docker
 
-- name: Create data directory 
-  file:
+- name: Create data directory
+  ansible.builtin.file:
     path: /data
     state: directory
     mode: '775'

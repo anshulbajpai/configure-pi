@@ -1,22 +1,22 @@
 - name: Create hdd group
-  group:
+  ansible.builtin.group:
     name: hdd
     gid: '1111'
 
 - name: Add pikachu to hdd group
-  user:
+  ansible.builtin.user:
     name: pikachu
     append: yes
     groups: hdd
-    
+
 - name: Mount HDD on boot
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/fstab
     backup: yes
     line: UUID=F114-D4AE /mnt/hdd vfat defaults,auto,noatime,noexec,users,gid=1111,umask=0002,rw,nofail,x-systemd.device-timeout=30 0 0
 
 - name: Install hd-idle compilation tools
-  apt:
+  ansible.builtin.apt:
     pkg:
       - build-essential
       - fakeroot
@@ -25,41 +25,41 @@
     update_cache: yes
     force_apt_get: yes
 
-- name: Create hd-idle directory 
-  file:
+- name: Create hd-idle directory
+  ansible.builtin.file:
     path: /etc/hd-idle
     state: directory
 
 - name: Download and extract hd-idle
-  unarchive:
+  ansible.builtin.unarchive:
     remote_src: yes
     src: http://sourceforge.net/projects/hd-idle/files/hd-idle-1.05.tgz
     dest: /etc/hd-idle
 
 - name: Build hd-idle deb package
   ignore_errors: yes
-  shell:
+  ansible.builtin.shell:
     chdir: /etc/hd-idle/hd-idle
     cmd: dpkg-buildpackage -rfakeroot
-    
+
 - name: Install hd-idle deb package
-  shell:
+  ansible.builtin.shell:
     chdir: /etc/hd-idle
     cmd: dpkg -i hd-idle_*.deb
-    
+
 - name: Ensure hd-idle is enabled
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/default/hd-idle
     regexp: '^START_HD_IDLE='
     line: START_HD_IDLE=true
 
 - name: Configure hd-idle
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/default/hd-idle
     backup: yes
     line: HD_IDLE_OPTS="-i 600 -a sda1 -i 300 -l /var/log/hd-idle.log"
 
 - name: Restart hd-idle
-  service:
+  ansible.builtin.service:
     name: hd-idle
-    state: restarted    
+    state: restarted

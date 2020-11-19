@@ -7,13 +7,13 @@
      - security
      - ufw
      - fail2ban
-     - bootConfig
+     - boot_config
      - hdd
      - reboot
-     - installDocker
+     - install_docker
      - portainer
      - pihole
      - plex
      - torrent
-    #  - hass
-    #  - tvheadend
+     - hass
+     - tvheadend

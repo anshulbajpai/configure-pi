@@ -1,5 +1,5 @@
 - name: Cron reboot raspberry pi
-  cron:
+  ansible.builtin.cron:
     name: "reboot"
     minute: "0"
     hour: "6"

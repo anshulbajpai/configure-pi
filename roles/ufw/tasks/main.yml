@@ -1,25 +1,25 @@
 - name: install ufw
-  apt:
+  ansible.builtin.apt:
     name: ufw
     state: present
     update_cache: yes
     force_apt_get: yes
-- name: ufw deny default in 
-  ufw:
+- name: ufw deny default in
+  community.general.ufw:
     default: deny
     direction: incoming
-- name: allow ssh in 
-  ufw:
+- name: allow ssh in
+  community.general.ufw:
     rule: allow
     direction: in
     proto: tcp
     port: '22'
-- name: limit ssh in 
-  ufw:
+- name: limit ssh in
+  community.general.ufw:
     rule: limit
     direction: in
     proto: tcp
     port: '22'
-- name: enable ufw 
-  ufw:
+- name: enable ufw
+  community.general.ufw:
     state: enabled

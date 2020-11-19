@@ -1,9 +1,9 @@
 - name: Create portainer docker volume
-  docker_volume:
+  community.general.docker_volume:
     name: portainer_data
 
 - name: Start portainer
-  docker_container:
+  community.general.docker_container:
     name: portainer
     image: portainer/portainer
     restart_policy: unless-stopped
@@ -11,16 +11,16 @@
     memory: 32M
     cpu_shares: 128
     cpuset_cpus: "3"
-    published_ports: 
+    published_ports:
       - '9000:9000'
-    volumes: 
+    volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - portainer_data:/data
 
-- name: allow 9000 tcp in 
-  ufw:
+- name: allow 9000 tcp in
+  community.general.ufw:
     rule: allow
     direction: in
     proto: tcp
-    port: '9000'      
+    port: '9000'
 

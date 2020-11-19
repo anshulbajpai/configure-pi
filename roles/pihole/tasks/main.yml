@@ -1,36 +1,36 @@
 - name: Create pihole etc directory
-  file:
+  ansible.builtin.file:
     path: /data/pihole/etc-pihole
     state: directory
 
 - name: Create pihole dnsmasqd directory
-  file:
+  ansible.builtin.file:
     path: /data/pihole/etc-dnsmasqd
     state: directory
 
 - name: Start pihole
-  docker_container:
+  community.general.docker_container:
     name: pihole
     hostname: pihole
     image: pihole/pihole:latest
     memory: 64M
     cpuset_cpus: "1,2"
     cpu_shares: 512
-    published_ports: 
+    published_ports:
       - '53:53/tcp'
       - '53:53/udp'
       - '80:80/tcp'
       - '443:443/tcp'
     restart_policy: unless-stopped
     restart: yes
-    volumes: 
+    volumes:
       - /data/pihole/etc-pihole/:/etc/pihole/
       - /data/pihole/etc-dnsmasqd/:/etc/dnsmasq.d/
     dns_servers:
       - '127.0.0.1'
       - '127.0.0.1'
     env:
-      TZ: 'Europe/London'  
+      TZ: 'Europe/London'
       DNS1: '103.86.96.100'
       DNS2: '103.86.99.100'
       DNSSEC: 'true'
@@ -40,30 +40,30 @@
       CONDITIONAL_FORWARDING_IP: '192.168.1.1'
       CONDITIONAL_FORWARDING_DOMAIN: 'local'
 
-- name: allow 53 tcp in 
-  ufw:
+- name: allow 53 tcp in
+  community.general.ufw:
     rule: allow
     direction: in
     proto: tcp
-    port: '53'      
+    port: '53'
 
-- name: allow 53 udp in 
-  ufw:
+- name: allow 53 udp in
+  community.general.ufw:
     rule: allow
     direction: in
     proto: udp
-    port: '53'      
+    port: '53'
 
-- name: allow 80 tcp in 
-  ufw:
+- name: allow 80 tcp in
+  community.general.ufw:
     rule: allow
     direction: in
     proto: tcp
-    port: '80'      
-    
-- name: allow 443 tcp in 
-  ufw:
+    port: '80'
+
+- name: allow 443 tcp in
+  community.general.ufw:
     rule: allow
     direction: in
     proto: tcp
-    port: '443'      
+    port: '443'
