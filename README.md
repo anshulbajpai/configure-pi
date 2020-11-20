@@ -2,7 +2,7 @@
 
 Configure my pi
 
-Using ansible 2.9 as of now
+Using ansible 2.10 as of now
 
 ## How to run
 `./run.sh`
