@@ -32,8 +32,7 @@
     restart_policy: unless-stopped
     restart: yes
     memory: 256M
-    cpuset_cpus: "0-2"
-    cpu_shares: 512
+    cpus: 2.5
     volumes:
       - /data/plex/config:/config
       - /mnt/hdd/Movies:/movies
@@ -46,6 +45,7 @@
       PUID: "{{ plex_user.uid }}"
       UMASK_SET: "022"
       VERSION: docker
+    container_default_behavior: compatibility
 
 - name: allow 32400 in
   community.general.ufw:

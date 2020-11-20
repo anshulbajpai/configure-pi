@@ -14,8 +14,7 @@
     hostname: pihole
     image: pihole/pihole:latest
     memory: 64M
-    cpuset_cpus: "1,2"
-    cpu_shares: 512
+    cpus: 1.0
     published_ports:
       - '53:53/tcp'
       - '53:53/udp'
@@ -31,14 +30,15 @@
       - '127.0.0.1'
     env:
       TZ: 'Europe/London'
-      DNS1: '103.86.96.100'
-      DNS2: '103.86.99.100'
+      DNS1: '1.1.1.1'
+      DNS2: '1.0.0.1'
       DNSSEC: 'true'
-      DNS_BOGUS_PRIV: 'false'
-      DNS_FQDN_REQUIRED: 'false'
+      DNS_BOGUS_PRIV: 'true'
+      DNS_FQDN_REQUIRED: 'true'
       CONDITIONAL_FORWARDING: 'true'
       CONDITIONAL_FORWARDING_IP: '192.168.1.1'
       CONDITIONAL_FORWARDING_DOMAIN: 'local'
+    container_default_behavior: compatibility
 
 - name: allow 53 tcp in
   community.general.ufw:

@@ -6,7 +6,7 @@
     name: qbittorrent
     password_lock: yes
     create_home: false
-    shell: ''
+    shell: ""
   register: qbittorrent_user
 
 - name: Create qbittorrent downloads directory
@@ -15,7 +15,7 @@
     state: directory
     owner: qbittorrent
     group: hdd
-    mode: '700'
+    mode: "700"
     recurse: yes
 
 - name: Create qbittorrent config directory
@@ -24,7 +24,7 @@
     state: directory
     owner: qbittorrent
     group: hdd
-    mode: '700'
+    mode: "700"
     recurse: yes
 
 - name: Create qbittorrent hook directory
@@ -33,7 +33,7 @@
     state: directory
     owner: qbittorrent
     group: hdd
-    mode: '700'
+    mode: "700"
     recurse: yes
 
 - name: Copy move downloads script
@@ -42,7 +42,7 @@
     dest: /data/qbittorrent/hook/moveDownloads.sh
     owner: qbittorrent
     group: hdd
-    mode: '700'
+    mode: "700"
 
 - name: Download and extract qbittorrent src
   ansible.builtin.unarchive:
@@ -81,14 +81,14 @@
 - name: inclue dark qbittorrent css in public index.html
   ansible.builtin.lineinfile:
     path: /data/qbittorrent/webui/www/public/index.html
-    insertafter: 'login.css'
+    insertafter: "login.css"
     firstmatch: true
     line: '<link rel="stylesheet" type="text/css" href="css/dark-qbittorrent-webui.css?v=${VERSION}" \>'
 
 - name: inclue dark qbittorrent css in private index.html
   ansible.builtin.lineinfile:
     path: /data/qbittorrent/webui/www/private/index.html
-    insertafter: 'Tabs.css'
+    insertafter: "Tabs.css"
     firstmatch: true
     line: '<link rel="stylesheet" type="text/css" href="css/dark-qbittorrent-webui.css?v=${VERSION}" \>'
 
@@ -99,12 +99,11 @@
     restart_policy: unless-stopped
     restart: yes
     memory: 512M
-    cpuset_cpus: "3"
-    cpu_shares: 512
+    cpus: 1.5
     published_ports:
-      - '6881:6881'
-      - '6881:6881/udp'
-      - '8080:8080'
+      - "6881:6881"
+      - "6881:6881/udp"
+      - "8080:8080"
     volumes:
       - /data/qbittorrent/config:/config
       - /data/qbittorrent/downloads:/downloads
@@ -113,27 +112,28 @@
       - /mnt/hdd/Movies:/movies
       - /mnt/hdd/Tv:/tv
     env:
-      TZ: 'Europe/London'
+      TZ: "Europe/London"
       PGID: "{{ qbittorrent_user.group }}"
       PUID: "{{ qbittorrent_user.uid }}"
+    container_default_behavior: compatibility
 
 - name: allow 8080 tcp in
   community.general.ufw:
     rule: allow
     direction: in
     proto: tcp
-    port: '8080'
+    port: "8080"
 
 - name: allow 6881 tcp in
   community.general.ufw:
     rule: allow
     direction: in
     proto: tcp
-    port: '6881'
+    port: "6881"
 
 - name: allow 6881 udp in
   community.general.ufw:
     rule: allow
     direction: in
     proto: udp
-    port: '6881'
+    port: "6881"
