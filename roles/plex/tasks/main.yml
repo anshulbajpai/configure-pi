@@ -32,7 +32,7 @@
     restart_policy: unless-stopped
     restart: yes
     memory: 256M
-    cpus: 2.5
+    cpus: 1.0
     volumes:
       - /data/plex/config:/config
       - /mnt/hdd/Movies:/movies
