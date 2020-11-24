@@ -1,0 +1,42 @@
+- name: Create prometheus config directory
+  ansible.builtin.file:
+    path: /data/prometheus/config
+    state: directory
+    owner: nobody
+    group: nogroup
+    recurse: yes
+
+- name: Create prometheus storage directory
+  ansible.builtin.file:
+    path: /data/prometheus/storage
+    state: directory
+    owner: nobody
+    group: nogroup
+    recurse: yes
+
+- name: Copy prometheus config
+  ansible.builtin.copy:
+    src: ../files/config.yml
+    dest: /data/prometheus/config/config.yml
+
+- name: Start prometheus
+  community.general.docker_container:
+    name: prometheus
+    image: prom/prometheus
+    command: ["--storage.tsdb.path=/data/prometheus", "--config.file=/etc/prometheus/prometheus.yml"]
+    network_mode: host
+    restart_policy: unless-stopped
+    restart: yes
+    memory: 64M
+    cpus: 0.5
+    volumes:
+      - /data/prometheus/config/config.yml:/etc/prometheus/prometheus.yml
+      - /data/prometheus/storage:/data/prometheus
+    container_default_behavior: compatibility
+
+- name: allow 9090 in
+  community.general.ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: '9090'

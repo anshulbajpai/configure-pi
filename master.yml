@@ -11,6 +11,7 @@
      - hdd
      - reboot
      - install_docker
+     - prometheus
      - portainer
      - pihole
      - plex
