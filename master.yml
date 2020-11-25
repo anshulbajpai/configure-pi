@@ -5,12 +5,14 @@
   become: yes
   roles:
      - security
+     - tmux
      - ufw
      - fail2ban
      - boot_config
      - hdd
      - reboot
      - install_docker
+     - cadvisor
      - prometheus
      - portainer
      - pihole
