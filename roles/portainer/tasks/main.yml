@@ -9,7 +9,7 @@
     restart_policy: unless-stopped
     restart: yes
     memory: 32M
-    cpus: 0.5
+    cpus: 0.25
     published_ports:
       - '9000:9000'
     volumes:
