@@ -12,11 +12,8 @@
      - hdd
      - reboot
      - install_docker
-     - cadvisor
-     - prometheus
      - portainer
      - pihole
      - plex
      - torrent
     #  - hass
-    #  - tvheadend

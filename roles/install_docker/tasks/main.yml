@@ -26,8 +26,3 @@
     path: /data
     state: directory
     mode: '775'
-
-- name: Expose prometheus metrics
-  ansible.builtin.copy:
-    src: ../files/daemon.json
-    dest: /etc/docker/daemon.json
