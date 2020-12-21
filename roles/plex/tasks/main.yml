@@ -31,7 +31,7 @@
     network_mode: host
     restart_policy: unless-stopped
     restart: yes
-    memory: 256M
+    memory: 512M
     cpus: 2.0
     volumes:
       - /data/plex/config:/config
