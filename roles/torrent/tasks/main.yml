@@ -44,54 +44,6 @@
     group: hdd
     mode: "700"
 
-- name: Download and extract qbittorrent src
-  ansible.builtin.unarchive:
-    remote_src: yes
-    src: https://github.com/qbittorrent/qBittorrent/archive/master.zip
-    dest: /data/qbittorrent/webui
-
-- name: copy qbittorrent webui src to www
-  ansible.builtin.copy:
-    src: /data/qbittorrent/webui/qBittorrent-master/src/webui/www
-    dest: /data/qbittorrent/webui
-    remote_src: true
-
-- name: copy qbittorrent icons src to www/public
-  ansible.builtin.copy:
-    src: /data/qbittorrent/webui/qBittorrent-master/src/icons
-    dest: /data/qbittorrent/webui/www/public
-    remote_src: true
-
-- name: copy qbittorrent icons src to www/private
-  ansible.builtin.copy:
-    src: /data/qbittorrent/webui/qBittorrent-master/src/icons
-    dest: /data/qbittorrent/webui/www/private
-    remote_src: true
-
-- name: Download dark qbittorrent css to public css
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/iFelix18/Dark-qBittorrent-WebUI/master/dark-qbittorrent-webui.css
-    dest: /data/qbittorrent/webui/www/public/css
-
-- name: Download dark qbittorrent css to private css
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/iFelix18/Dark-qBittorrent-WebUI/master/dark-qbittorrent-webui.css
-    dest: /data/qbittorrent/webui/www/private/css
-
-- name: inclue dark qbittorrent css in public index.html
-  ansible.builtin.lineinfile:
-    path: /data/qbittorrent/webui/www/public/index.html
-    insertafter: "login.css"
-    firstmatch: true
-    line: '<link rel="stylesheet" type="text/css" href="css/dark-qbittorrent-webui.css?v=${VERSION}" \>'
-
-- name: inclue dark qbittorrent css in private index.html
-  ansible.builtin.lineinfile:
-    path: /data/qbittorrent/webui/www/private/index.html
-    insertafter: "Tabs.css"
-    firstmatch: true
-    line: '<link rel="stylesheet" type="text/css" href="css/dark-qbittorrent-webui.css?v=${VERSION}" \>'
-
 - name: Start qbittorrent
   community.general.docker_container:
     name: qbittorrent

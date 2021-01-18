@@ -26,3 +26,21 @@
     path: /data
     state: directory
     mode: '775'
+
+- name: Install pip3
+  ansible.builtin.apt:
+    name: python3-pip
+    state: present
+    update_cache: yes
+    force_apt_get: yes
+
+- name: Install docker package for python
+  ansible.builtin.pip:
+    name: docker
+
+- name: Install ctop
+  ansible.builtin.apt:
+    name: ctop
+    state: present
+    update_cache: yes
+    force_apt_get: yes

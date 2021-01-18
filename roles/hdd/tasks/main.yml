@@ -15,37 +15,9 @@
     backup: yes
     line: UUID=F114-D4AE /mnt/hdd vfat defaults,auto,noatime,noexec,users,gid=1111,umask=0002,rw,nofail,x-systemd.device-timeout=30 0 0
 
-- name: Install hd-idle compilation tools
-  ansible.builtin.apt:
-    pkg:
-      - build-essential
-      - fakeroot
-      - debhelper
-    state: present
-    update_cache: yes
-    force_apt_get: yes
-
-- name: Create hd-idle directory
-  ansible.builtin.file:
-    path: /etc/hd-idle
-    state: directory
-
-- name: Download and extract hd-idle
-  ansible.builtin.unarchive:
-    remote_src: yes
-    src: http://sourceforge.net/projects/hd-idle/files/hd-idle-1.05.tgz
-    dest: /etc/hd-idle
-
-- name: Build hd-idle deb package
-  ignore_errors: yes
-  ansible.builtin.shell:
-    chdir: /etc/hd-idle/hd-idle
-    cmd: dpkg-buildpackage -rfakeroot
-
 - name: Install hd-idle deb package
-  ansible.builtin.shell:
-    chdir: /etc/hd-idle
-    cmd: dpkg -i hd-idle_*.deb
+  ansible.builtin.apt:
+    deb: https://github.com/adelolmo/hd-idle/releases/download/v1.12/hd-idle_1.12_armhf.deb
 
 - name: Ensure hd-idle is enabled
   ansible.builtin.lineinfile:

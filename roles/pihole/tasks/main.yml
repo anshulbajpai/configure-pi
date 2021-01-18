@@ -26,18 +26,17 @@
       - /data/pihole/etc-pihole/:/etc/pihole/
       - /data/pihole/etc-dnsmasqd/:/etc/dnsmasq.d/
     dns_servers:
-      - '127.0.0.1'
-      - '127.0.0.1'
+      - '1.1.1.1'
     env:
       TZ: 'Europe/London'
-      DNS1: '1.1.1.1'
-      DNS2: '1.0.0.1'
+      PIHOLE_DNS_: '1.1.1.1;1.0.0.1'  
       DNSSEC: 'true'
       DNS_BOGUS_PRIV: 'true'
       DNS_FQDN_REQUIRED: 'true'
-      CONDITIONAL_FORWARDING: 'true'
-      CONDITIONAL_FORWARDING_IP: '192.168.1.1'
-      CONDITIONAL_FORWARDING_DOMAIN: 'local'
+      REV_SERVER: 'false'
+      REV_SERVER_CIDR: '192.168.1.0/24'
+      REV_SERVER_TARGET: '192.168.1.1'
+      REV_SERVER_DOMAIN: 'local'
     container_default_behavior: compatibility
 
 - name: allow 53 tcp in
