@@ -1,0 +1,17 @@
+- name: Create gotify network
+  community.general.docker_network:
+    name: gotify_network
+
+- name: Start gotify
+  community.general.docker_container:
+    name: gotify
+    image: gotify/server-arm7
+    restart_policy: unless-stopped
+    restart: yes
+    memory: 32M
+    cpus: 0.25
+    volumes:
+      - /var/gotify/data:/app/data
+    container_default_behavior: compatibility
+    networks:
+      - name: "gotify_network"

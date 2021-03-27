@@ -1,0 +1,15 @@
+- name: Start passport-return-date-finder
+  community.general.docker_container:
+    name: passport-return-date-finder
+    image: anshulbajpai/pp-return-date-finder-armv7
+    restart_policy: unless-stopped
+    restart: yes
+    memory: 256M
+    cpus: 0.25
+    env:
+      GOTIFY_APP_TOKEN: 'AzcXH-AMgxFL1mV'
+      NOTIFIER_HOST: "gotify"
+      TEST_NOTIFIER: "true"
+    container_default_behavior: compatibility
+    networks:
+      - name: "gotify_network"

@@ -16,4 +16,6 @@
      - pihole
      - plex
      - torrent
+     - gotify
+     - date_finder
     #  - hass
