@@ -7,6 +7,7 @@
     memory: 128M
     cpus: 2.0
     env:
+      JAVA_OPTS: "-XX:InitialRAMPercentage=50.0 -XX:MaxRAMPercentage=75.0"  
       GOTIFY_APP_TOKEN: 'AzcXH-AMgxFL1mV'
       GOTIFY_HOST: "gotify"
       PASSPORT_RETURN_CRON: "0 0/2 17-19 * * ? *"
