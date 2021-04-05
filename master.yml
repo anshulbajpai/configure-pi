@@ -4,18 +4,18 @@
   remote_user: ansible
   become: yes
   roles:
-     - security
-     - tmux
-     - ufw
-     - fail2ban
-     - boot_config
-     - hdd
-     - reboot
-     - install_docker
-     - portainer
-     - pihole
-     - plex
-     - torrent
-     - gotify
-     - notifier
-    #  - hass
+    - security
+    - tmux
+    - ufw
+    - fail2ban
+    - boot_config
+    - hdd
+    - reboot
+    - install_docker
+    - portainer
+    - pihole
+    - plex
+    - torrent
+#    - gotify
+#    - notifier
+#    - hass
