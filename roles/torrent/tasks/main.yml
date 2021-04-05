@@ -1,6 +1,5 @@
 - name: Create qbittorrent user
   ansible.builtin.user:
-    append: yes
     group: hdd
     system: yes
     name: qbittorrent
@@ -60,7 +59,6 @@
       - /data/qbittorrent/config:/config
       - /data/qbittorrent/downloads:/downloads
       - /data/qbittorrent/hook:/hook
-      - /data/qbittorrent/webui:/webui
       - /mnt/hdd/Movies:/movies
       - /mnt/hdd/Tv:/tv
     env:

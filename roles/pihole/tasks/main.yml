@@ -26,6 +26,7 @@
       - /data/pihole/etc-pihole/:/etc/pihole/
       - /data/pihole/etc-dnsmasqd/:/etc/dnsmasq.d/
     dns_servers:
+      - '127.0.0.1'
       - '1.1.1.1'
     env:
       TZ: 'Europe/London'

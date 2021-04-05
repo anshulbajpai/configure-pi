@@ -1,14 +1,6 @@
-- name: Create plex group
-  ansible.builtin.group:
-    name: plex
-    gid: '2222'
-
 - name: Create plex user
   ansible.builtin.user:
-    append: yes
-    group: plex
-    groups:
-      - hdd
+    group: hdd
     system: yes
     name: plex
     password_lock: yes
@@ -21,7 +13,7 @@
     path: /data/plex/config
     state: directory
     owner: plex
-    group: plex
+    group: hdd
     mode: '770'
 
 - name: Start plex
@@ -43,7 +35,6 @@
       TZ: 'Europe/London'
       PGID: "{{ plex_user.group }}"
       PUID: "{{ plex_user.uid }}"
-      UMASK_SET: "022"
       VERSION: docker
     container_default_behavior: compatibility
 
