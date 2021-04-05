@@ -14,7 +14,7 @@
     hostname: pihole
     image: pihole/pihole:latest
     memory: 64M
-    cpus: 0.5
+    cpus: 1.0
     published_ports:
       - '53:53/tcp'
       - '53:53/udp'
