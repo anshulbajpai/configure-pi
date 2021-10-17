@@ -2,5 +2,6 @@
   ansible.builtin.cron:
     name: "reboot"
     minute: "0"
-    hour: "6"
+    hour: "5"
+    weekday: "6"
     job: "sudo reboot"
