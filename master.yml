@@ -3,6 +3,9 @@
   gather_facts: false
   remote_user: ansible
   become: yes
+#  vars_prompt:
+#    - name: "nord_vpn_password"
+#      prompt: "what is your Nord VPN password?"
   roles:
     - security
     - tmux
@@ -15,6 +18,7 @@
     - portainer
     - pihole
     - plex
+    - nordvpn
     - torrent
 #    - gotify
 #    - notifier

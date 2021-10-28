@@ -51,10 +51,7 @@
     restart: yes
     memory: 512M
     cpus: 0.5
-    published_ports:
-      - "6881:6881"
-      - "6881:6881/udp"
-      - "8080:8080"
+    network_mode: "container:nordvpn"
     volumes:
       - /data/qbittorrent/config:/config
       - /data/qbittorrent/downloads:/downloads
@@ -66,24 +63,3 @@
       PGID: "{{ qbittorrent_user.group }}"
       PUID: "{{ qbittorrent_user.uid }}"
     container_default_behavior: compatibility
-
-- name: allow 8080 tcp in
-  community.general.ufw:
-    rule: allow
-    direction: in
-    proto: tcp
-    port: "8080"
-
-- name: allow 6881 tcp in
-  community.general.ufw:
-    rule: allow
-    direction: in
-    proto: tcp
-    port: "6881"
-
-- name: allow 6881 udp in
-  community.general.ufw:
-    rule: allow
-    direction: in
-    proto: udp
-    port: "6881"

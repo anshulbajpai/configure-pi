@@ -1,0 +1,42 @@
+- name: Start NordVPN
+  community.general.docker_container:
+    name: nordvpn
+    image: ghcr.io/bubuntux/nordvpn
+    capabilities:
+      - NET_ADMIN
+    restart_policy: unless-stopped
+    restart: yes
+    memory: 256M
+    cpus: 0.25
+    published_ports:
+      - "6881:6881" # For qbitorrent
+      - "6881:6881/udp" # For qbitorrent
+      - "8080:8080" # For qbitorrent
+    env:
+      USER: "bajpai.anshul@gmail.com"
+      PASS: "{{ nord_vpn_password }}"
+      CONNECT: "Switzerland"
+      TECHNOLOGY: "NordLynx"
+      NETWORK: "192.168.1.0/24"
+    container_default_behavior: compatibility
+
+- name: allow 8080 tcp in
+  community.general.ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: "8080"
+
+- name: allow 6881 tcp in
+  community.general.ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: "6881"
+
+- name: allow 6881 udp in
+  community.general.ufw:
+    rule: allow
+    direction: in
+    proto: udp
+    port: "6881"
