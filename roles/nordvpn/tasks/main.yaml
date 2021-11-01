@@ -1,7 +1,7 @@
 - name: Start NordVPN
   community.general.docker_container:
     name: nordvpn
-    image: ghcr.io/bubuntux/nordvpn
+    image: ghcr.io/bubuntux/nordvpn:v3.10.0-1-1
     capabilities:
       - NET_ADMIN
     restart_policy: unless-stopped

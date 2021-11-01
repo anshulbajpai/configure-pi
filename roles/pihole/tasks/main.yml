@@ -12,7 +12,7 @@
   community.general.docker_container:
     name: pihole
     hostname: pihole
-    image: pihole/pihole:2021.09
+    image: pihole/pihole:2021.10.1
     memory: 64M
     cpus: 1.0
     published_ports:
