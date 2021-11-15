@@ -10,6 +10,8 @@
     restart: yes
     memory: 32M
     cpus: 0.25
+    published_ports:
+      - '8081:80'
     volumes:
       - /var/gotify/data:/app/data
     container_default_behavior: compatibility
