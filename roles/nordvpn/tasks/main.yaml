@@ -15,7 +15,7 @@
     env:
       USER: "bajpai.anshul@gmail.com"
       PASS: "{{ nord_vpn_password }}"
-      CONNECT: "Switzerland"
+      CONNECT: "ch284"
       TECHNOLOGY: "NordLynx"
       NETWORK: "192.168.1.0/24"
     container_default_behavior: compatibility
