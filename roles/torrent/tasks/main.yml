@@ -51,7 +51,7 @@
     restart: yes
     memory: 512M
     cpus: 0.5
-    network_mode: "container:nordvpn"
+    network_mode: "container:nordlynx"
     volumes:
       - /data/qbittorrent/config:/config
       - /data/qbittorrent/downloads:/downloads

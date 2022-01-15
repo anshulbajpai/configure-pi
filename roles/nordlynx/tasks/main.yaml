@@ -1,7 +1,14 @@
-- name: Start NordVPN
+- name: install wireguard
+  ansible.builtin.apt:
+    name: wireguard
+    state: present
+    update_cache: true
+    force_apt_get: true
+
+- name: Start NordLynx
   community.general.docker_container:
-    name: nordvpn
-    image: ghcr.io/bubuntux/nordvpn:v3.10.0-1-1
+    name: nordlynx
+    image: ghcr.io/bubuntux/nordlynx:20220101
     capabilities:
       - NET_ADMIN
     restart_policy: unless-stopped
@@ -13,11 +20,9 @@
       - "6881:6881/udp" # For qbitorrent
       - "8080:8080" # For qbitorrent
     env:
-      USER: "bajpai.anshul@gmail.com"
-      PASS: "{{ nord_vpn_password }}"
-      CONNECT: "ch284"
-      TECHNOLOGY: "NordLynx"
-      NETWORK: "192.168.1.0/24"
+      PRIVATE_KEY: "{{ nord_lynx_private_key }}"
+      NET_LOCAL: "192.168.1.0/24"
+      QUERY: "filters\\[country_id\\]=209"
     container_default_behavior: compatibility
 
 - name: allow 8080 tcp in
