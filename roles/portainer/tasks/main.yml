@@ -5,7 +5,7 @@
 - name: Start portainer
   community.general.docker_container:
     name: portainer
-    image: portainer/portainer-ce:2.11.0
+    image: portainer/portainer-ce:2.14.0
     restart_policy: unless-stopped
     restart: yes
     memory: 32M
