@@ -13,25 +13,4 @@
   ansible.builtin.lineinfile:
     path: /etc/fstab
     backup: yes
-    line: UUID=F114-D4AE /mnt/hdd vfat defaults,auto,noatime,noexec,users,gid=1111,umask=0002,rw,nofail,x-systemd.device-timeout=30 0 0
-
-- name: Install hd-idle deb package
-  ansible.builtin.apt:
-    deb: https://github.com/adelolmo/hd-idle/releases/download/v1.12/hd-idle_1.12_armhf.deb
-
-- name: Ensure hd-idle is enabled
-  ansible.builtin.lineinfile:
-    path: /etc/default/hd-idle
-    regexp: '^START_HD_IDLE='
-    line: START_HD_IDLE=true
-
-- name: Configure hd-idle
-  ansible.builtin.lineinfile:
-    path: /etc/default/hd-idle
-    backup: yes
-    line: HD_IDLE_OPTS="-i 600 -a sda1 -i 300 -l /var/log/hd-idle.log"
-
-- name: Restart hd-idle
-  ansible.builtin.service:
-    name: hd-idle
-    state: restarted
+    line: UUID=62D4-67A1 /mnt/hdd exfat defaults,auto,noatime,noexec,users,gid=1111,umask=0002,rw,nofail,x-systemd.device-timeout=30 0 0
