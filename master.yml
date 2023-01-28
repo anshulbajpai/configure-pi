@@ -4,10 +4,10 @@
   remote_user: ansible
   become: yes
   vars_prompt:
-#    - name: "nord_lynx_private_key"
+  #  - name: "nord_lynx_private_key"
       # Use following command to generate private key
-      #docker run --rm --cap-add=NET_ADMIN -e USER=USER_ID -e PASS=PASSWORD bubuntux/nordvpn nord_private_key
-#      prompt: "what is your Nord VPN private key?"
+      #docker run --rm --cap-add=NET_ADMIN -e USER=USER_ID -e PASS=PASSWORD bubuntux/nordvpn:get_private_key
+    #  prompt: "what is your Nord VPN private key?"
   roles:
     - security
     - tmux

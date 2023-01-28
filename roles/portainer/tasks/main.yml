@@ -5,23 +5,30 @@
 - name: Start portainer
   community.general.docker_container:
     name: portainer
-    image: portainer/portainer-ce:2.14.0
+    image: portainer/portainer-ce:2.16.2
     restart_policy: unless-stopped
     restart: yes
     memory: 32M
     cpus: 0.25
     published_ports:
-      - '9000:9000'
+      - '8000:8000'
+      - '9443:9443'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /var/lib/docker/volumes:/var/lib/docker/volumes
       - portainer_data:/data
     container_default_behavior: compatibility
 
-- name: allow 9000 tcp in
+- name: allow 8000 tcp in
   community.general.ufw:
     rule: allow
     direction: in
     proto: tcp
-    port: '9000'
+    port: '8000'
+
+- name: allow 9443 tcp in
+  community.general.ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: '9443'
 

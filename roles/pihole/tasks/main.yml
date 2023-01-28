@@ -12,7 +12,7 @@
   community.general.docker_container:
     name: pihole
     hostname: pihole
-    image: pihole/pihole:2022.05
+    image: pihole/pihole:2023.01.10
     memory: 64M
     cpus: 1.0
     published_ports:
@@ -27,10 +27,10 @@
       - /data/pihole/etc-dnsmasqd/:/etc/dnsmasq.d/
     dns_servers:
       - '127.0.0.1'
-      - '1.1.1.1'
+      - '192.168.1.1'
     env:
       TZ: 'Europe/London'
-      PIHOLE_DNS_: '1.1.1.1;1.0.0.1'  
+      PIHOLE_DNS_: '103.86.96.100;103.86.99.100'  
       DNSSEC: 'true'
       DNS_BOGUS_PRIV: 'true'
       DNS_FQDN_REQUIRED: 'true'

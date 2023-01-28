@@ -46,7 +46,7 @@
 - name: Start qbittorrent
   community.general.docker_container:
     name: qbittorrent
-    image: ghcr.io/linuxserver/qbittorrent:4.4.0
+    image: ghcr.io/linuxserver/qbittorrent:version-4.5.0-r1
     restart_policy: unless-stopped
     restart: yes
     memory: 512M
