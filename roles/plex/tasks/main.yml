@@ -19,7 +19,7 @@
 - name: Start plex
   community.general.docker_container:
     name: plex
-    image: ghcr.io/linuxserver/plex:1.30.2
+    image: ghcr.io/linuxserver/plex:1.32.0
     network_mode: host
     restart_policy: unless-stopped
     restart: yes
