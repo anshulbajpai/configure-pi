@@ -19,12 +19,12 @@
 - name: Start plex
   community.general.docker_container:
     name: plex
-    image: ghcr.io/linuxserver/plex:1.32.0
+    image: ghcr.io/linuxserver/plex:1.32.1
     network_mode: host
     restart_policy: unless-stopped
     restart: yes
     memory: 512M
-    cpus: 3.0
+    cpus: 4.0
     volumes:
       - /data/plex/config:/config
       - /mnt/hdd/Movies:/movies

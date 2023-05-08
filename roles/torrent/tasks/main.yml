@@ -50,7 +50,7 @@
     restart_policy: unless-stopped
     restart: yes
     memory: 512M
-    cpus: 0.5
+    cpus: 0.25
     network_mode: "container:nordlynx"
     volumes:
       - /data/qbittorrent/config:/config

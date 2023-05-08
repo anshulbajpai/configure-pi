@@ -13,7 +13,7 @@
       - NET_ADMIN
     restart_policy: unless-stopped
     restart: yes
-    memory: 128M
+    memory: 32M
     cpus: 0.25
     published_ports:
       - "6881:6881" # For qbitorrent
