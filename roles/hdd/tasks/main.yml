@@ -9,6 +9,13 @@
     append: yes
     groups: hdd
 
+- name: install exfat-fuse
+  ansible.builtin.apt:
+    name: exfat-fuse
+    state: present
+    update_cache: true
+    force_apt_get: true
+
 - name: Mount HDD on boot
   ansible.builtin.lineinfile:
     path: /etc/fstab
