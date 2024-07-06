@@ -10,23 +10,22 @@
 
 - name: Create plex config directory
   ansible.builtin.file:
-    path: /data/plex/config
+    path: /mnt/hdd/pi-data/plex/config
     state: directory
-    owner: plex
-    group: hdd
     mode: '770'
 
 - name: Start plex
   community.general.docker_container:
     name: plex
     image: linuxserver/plex:1.40.3
-    network_mode: host
     restart_policy: unless-stopped
     restart: yes
     memory: 512M
     cpus: 4.0
+    published_ports:
+      - '32400:32400'
     volumes:
-      - /data/plex/config:/config
+      - /mnt/hdd/pi-data/plex/config:/config
       - /mnt/hdd/Movies:/movies
       - /mnt/hdd/Tv:/tv
       - /mnt/hdd/Pictures:/pictures

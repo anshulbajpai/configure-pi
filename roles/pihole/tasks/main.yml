@@ -1,11 +1,11 @@
 - name: Create pihole etc directory
   ansible.builtin.file:
-    path: /data/pihole/etc-pihole
+    path: /mnt/hdd/pi-data/pihole/etc-pihole
     state: directory
 
 - name: Create pihole dnsmasqd directory
   ansible.builtin.file:
-    path: /data/pihole/etc-dnsmasqd
+    path: /mnt/hdd/pi-data/pihole/etc-dnsmasqd
     state: directory
 
 - name: Start pihole
@@ -23,8 +23,8 @@
     restart_policy: unless-stopped
     restart: yes
     volumes:
-      - /data/pihole/etc-pihole/:/etc/pihole/
-      - /data/pihole/etc-dnsmasqd/:/etc/dnsmasq.d/
+      - /mnt/hdd/pi-data/pihole/etc-pihole/:/etc/pihole/
+      - /mnt/hdd/pi-data/pihole/etc-dnsmasqd/:/etc/dnsmasq.d/
     dns_servers:
       - '127.0.0.1'
       - '192.168.1.1'
