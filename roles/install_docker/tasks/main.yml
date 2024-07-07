@@ -9,6 +9,9 @@
   # FQCN not working here.
   shell: curl -fsSL https://get.docker.com | sh
 
+- name: Install docker-ctop
+  ansible.builtin.script: install-ctop.sh
+
 - name: Add pikachu to docker group
   ansible.builtin.user:
     name: pikachu
