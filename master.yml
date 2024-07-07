@@ -25,6 +25,6 @@
     - plex
     - gluetun
     # - nordlynx
-    # - torrent
+    - torrent
     # - gotify
     # - notifier

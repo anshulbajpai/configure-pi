@@ -10,8 +10,10 @@
 
 - name: Create plex config directory
   ansible.builtin.file:
-    path: /mnt/hdd/pi-data/plex/config
+    path: /data/plex/config
     state: directory
+    owner: plex
+    group: hdd
     mode: '770'
 
 - name: Start plex
@@ -22,10 +24,9 @@
     restart: yes
     memory: 512M
     cpus: 4.0
-    published_ports:
-      - '32400:32400'
+    network_mode: host
     volumes:
-      - /mnt/hdd/pi-data/plex/config:/config
+      - /data/plex/config:/config
       - /mnt/hdd/Movies:/movies
       - /mnt/hdd/Tv:/tv
       - /mnt/hdd/Pictures:/pictures

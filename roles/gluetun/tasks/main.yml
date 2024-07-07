@@ -1,12 +1,16 @@
 - name: Start gluetun
   community.general.docker_container:
     name: gluetun
-    image: qmcgaw/gluetun:v3.37.0
+    image: qmcgaw/gluetun:v3.38.0
     capabilities:
       - NET_ADMIN
     restart_policy: unless-stopped
     restart: yes
     cpus: 0.5
+    published_ports:
+      - "6881:6881" # For qbitorrent
+      - "6881:6881/udp" # For qbitorrent
+      - "8080:8080" # For qbitorrent
     env:
       VPN_SERVICE_PROVIDER: surfshark
       VPN_TYPE: wireguard
