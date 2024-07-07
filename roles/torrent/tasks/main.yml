@@ -49,8 +49,8 @@
     image: ghcr.io/linuxserver/qbittorrent:4.6.5
     restart_policy: unless-stopped
     restart: yes
-    memory: 512M
-    cpus: 0.25
+    memory: 768M
+    cpus: 0.5
     network_mode: "container:gluetun"
     volumes:
       - /data/qbittorrent/config:/config

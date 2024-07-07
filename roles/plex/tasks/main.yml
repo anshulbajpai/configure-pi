@@ -22,8 +22,7 @@
     image: linuxserver/plex:1.40.3
     restart_policy: unless-stopped
     restart: yes
-    memory: 512M
-    cpus: 4.0
+    memory: 1024M
     network_mode: host
     volumes:
       - /data/plex/config:/config

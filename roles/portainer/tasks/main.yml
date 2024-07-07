@@ -8,7 +8,8 @@
     image: portainer/portainer-ce:2.20.3
     restart_policy: unless-stopped
     restart: yes
-    memory: 16M
+    memory: 64M
+    memory_swap: 128M
     cpus: 0.25
     published_ports:
       - '8000:8000'
