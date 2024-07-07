@@ -10,6 +10,8 @@
     #  prompt: "what is your Nord VPN private key?"
   #  - name: "plex_claim"
   #    prompt: "what is your Plex claim?"
+   - name: "surfshark_wireguard_private_key"
+     prompt: "what is your surfshark_wireguard_private_key?"
   roles:
     - security
     - ufw
@@ -21,6 +23,7 @@
     - portainer
     - pihole
     - plex
+    - gluetun
     # - nordlynx
     # - torrent
     # - gotify

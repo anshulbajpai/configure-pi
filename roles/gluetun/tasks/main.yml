@@ -1,0 +1,16 @@
+- name: Start gluetun
+  community.general.docker_container:
+    name: gluetun
+    image: qmcgaw/gluetun:v3.37.0
+    capabilities:
+      - NET_ADMIN
+    restart_policy: unless-stopped
+    restart: yes
+    cpus: 0.5
+    env:
+      VPN_SERVICE_PROVIDER: surfshark
+      VPN_TYPE: wireguard
+      WIREGUARD_PRIVATE_KEY: "{{ surfshark_wireguard_private_key }}"
+      WIREGUARD_ADDRESSES: '10.14.0.2/16'
+      SERVER_COUNTRIES: Switzerland
+    container_default_behavior: compatibility
