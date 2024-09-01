@@ -1,0 +1,32 @@
+- name: update-vm-max_map_count
+  ansible.builtin.blockinfile:
+    path: /etc/sysctl.conf
+    block: |
+      vm.max_map_count=262144
+
+- name: create-seafile-mysql-directory
+  ansible.builtin.file:
+    path: /data/seafile/mysql
+    state: directory
+
+- name: copy-seafile-files
+  ansible.builtin.copy:
+    src: ../files
+    dest: /tmp/seafile
+
+- name: start-seafile
+  community.docker.docker_compose_v2:
+    project_src: /tmp/seafile/files
+  register: seafile_output
+
+- name: show-seafile-results
+  ansible.builtin.debug:
+    var: seafile_output
+
+- name: allow-9000-in
+  community.general.ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: '9000'
+

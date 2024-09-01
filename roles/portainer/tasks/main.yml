@@ -1,8 +1,8 @@
-- name: Create portainer docker volume
+- name: create-portainer-docker-volume
   community.general.docker_volume:
     name: portainer_data
 
-- name: Start portainer
+- name: start-portainer
   community.general.docker_container:
     name: portainer
     image: portainer/portainer-ce:2.20.3
@@ -12,21 +12,21 @@
     memory_swap: 128M
     cpus: 0.25
     published_ports:
-      - '8000:8000'
+      # - '8000:8000'
       - '9443:9443'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
     container_default_behavior: compatibility
 
-- name: allow 8000 tcp in
-  community.general.ufw:
-    rule: allow
-    direction: in
-    proto: tcp
-    port: '8000'
+# - name: allow-8000-tcp-in
+#   community.general.ufw:
+#     rule: allow
+#     direction: in
+#     proto: tcp
+#     port: '8000'
 
-- name: allow 9443 tcp in
+- name: allow-9443-tcp-in
   community.general.ufw:
     rule: allow
     direction: in
