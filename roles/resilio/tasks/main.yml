@@ -1,0 +1,70 @@
+- name: create-resilio-user
+  ansible.builtin.user:
+    group: hdd
+    system: yes
+    name: resilio
+    password_lock: yes
+    create_home: false
+    shell: ''
+  register: resilio_user
+
+- name: create-resilio-config-directory
+  ansible.builtin.file:
+    path: /data/resilio/config
+    state: directory
+    owner: resilio
+    group: hdd
+    mode: "700"
+    recurse: yes
+
+- name: create-resilio-sync-directory
+  ansible.builtin.file:
+    path: /mnt/hdd/resilio/sync
+    state: directory
+
+- name: create-resilio-downloads-directory
+  ansible.builtin.file:
+    path: /mnt/hdd/resilio/downloads
+    state: directory
+
+- name: start-resilio
+  community.general.docker_container:
+    name: resilio
+    image: lscr.io/linuxserver/resilio-sync:3.0.0.1409-1-ls188
+    restart_policy: unless-stopped
+    restart: yes
+    volumes:
+      - /mnt/hdd/resilio/sync:/sync
+      - /mnt/hdd/resilio/downloads:/downloads
+      - /mnt/hdd/resilio/sync:/mnt/sync
+      - /data/resilio/config:/config
+    published_ports:
+      - '8888:8888'
+      - '55555:55555'
+    env:
+      # PLEX_CLAIM: "{{ plex_claim }}"
+      TZ: 'Europe/London'
+      PGID: "{{ resilio_user.group }}"
+      PUID: "{{ resilio_user.uid }}"
+    container_default_behavior: compatibility
+
+- name: allow-8888-in
+  community.general.ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: '8888'
+
+- name: allow-55555-tcp-in
+  community.general.ufw:
+    rule: allow
+    direction: in
+    proto: tcp
+    port: '55555'
+
+- name: allow-55555-udp-in
+  community.general.ufw:
+    rule: allow
+    direction: in
+    proto: udp
+    port: '55555'
