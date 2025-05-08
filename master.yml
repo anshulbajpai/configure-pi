@@ -23,9 +23,9 @@
     - portainer
     - pihole
     - plex
-    - gluetun
+    # - gluetun
     # - nordlynx
-    - torrent
+    # - torrent
     - seafile
     - resilio
     # - gotify
