@@ -26,7 +26,7 @@
     # - gluetun
     # - nordlynx
     # - torrent
-    - seafile
+    # - seafile
     - resilio
     # - gotify
     # - notifier
