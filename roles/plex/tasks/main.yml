@@ -29,6 +29,7 @@
       - /mnt/hdd/Movies:/movies
       - /mnt/hdd/Tv:/tv
       - /mnt/hdd/Pictures:/pictures
+      - /mnt/hdd/resilio/sync/anshul-camera:/anshul-camera
     env:
       # PLEX_CLAIM: "{{ plex_claim }}"
       TZ: 'Europe/London'
