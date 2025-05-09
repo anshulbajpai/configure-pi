@@ -2,7 +2,9 @@
 
 Configure my pi
 
-Using ansible 2.10 as of now
+# Install ansible plugin
+
+`ASDF_PYAPP_INCLUDE_DEPS=1 asdf plugin add ansible https://github.com/amrox/asdf-pyapp.git`
 
 ## How to run
 `./run.sh`

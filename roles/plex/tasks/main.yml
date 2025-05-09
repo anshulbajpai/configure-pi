@@ -19,7 +19,7 @@
 - name: Start plex
   community.general.docker_container:
     name: plex
-    image: linuxserver/plex:1.40.4
+    image: linuxserver/plex:1.41.6
     restart_policy: unless-stopped
     restart: yes
     memory: 1024M

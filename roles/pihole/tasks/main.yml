@@ -12,7 +12,7 @@
   community.general.docker_container:
     name: pihole
     hostname: pihole
-    image: pihole/pihole:2024.06.0
+    image: pihole/pihole:2025.04.0
     memory: 128M
     cpus: 0.5
     published_ports:
@@ -30,14 +30,13 @@
       - '192.168.1.1'
     env:
       TZ: 'Europe/London'
-      PIHOLE_DNS_: '1.1.1.1;1.0.0.1'  
-      DNSSEC: 'true'
-      DNS_BOGUS_PRIV: 'true'
-      DNS_FQDN_REQUIRED: 'true'
-      REV_SERVER: 'true'
-      REV_SERVER_CIDR: '192.168.1.0/24'
-      REV_SERVER_TARGET: '192.168.1.1'
-      REV_SERVER_DOMAIN: 'local'
+      FTLCONF_dns_listeningMode: 'all'
+      FTLCONF_misc_etc_dnsmasq_d: 'true'
+      FTLCONF_dns_upstreams: '1.1.1.1;1.0.0.1'  
+      FTLCONF_dns_dnssec: 'true'
+      FTLCONF_dns_bogusPriv: 'true'
+      FTLCONF_dns_domainNeeded: 'true'
+      FTLCONF_dns_revServers: 'true,192.168.1.0/24,192.168.1.1,local'
     container_default_behavior: compatibility
 
 - name: allow 53 tcp in

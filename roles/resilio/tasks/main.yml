@@ -30,13 +30,12 @@
 - name: start-resilio
   community.general.docker_container:
     name: resilio
-    image: lscr.io/linuxserver/resilio-sync:3.0.0.1409-1-ls188
+    image: lscr.io/linuxserver/resilio-sync:3.0.3.1065-1-ls210
     restart_policy: unless-stopped
     restart: yes
     volumes:
       - /mnt/hdd/resilio/sync:/sync
       - /mnt/hdd/resilio/downloads:/downloads
-      - /mnt/hdd/resilio/sync:/mnt/sync
       - /data/resilio/config:/config
     published_ports:
       - '8888:8888'
