@@ -22,11 +22,11 @@
     - install_docker
     - portainer
     - pihole
-    - plex
+    - resilio
+    # - plex
     # - gluetun
     # - nordlynx
     # - torrent
     # - seafile
-    - resilio
     # - gotify
     # - notifier

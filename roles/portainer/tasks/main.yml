@@ -5,10 +5,10 @@
 - name: start-portainer
   community.general.docker_container:
     name: portainer
-    image: portainer/portainer-ce:2.27.5-alpine
+    image: portainer/portainer-ce:2.32.0-alpine
     restart_policy: unless-stopped
     restart: yes
-    memory: 64M
+    memory: 128M
     memory_swap: 128M
     cpus: 0.25
     published_ports:

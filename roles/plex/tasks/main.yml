@@ -24,6 +24,7 @@
     restart: yes
     memory: 1024M
     network_mode: host
+    state: stopped
     volumes:
       - /data/plex/config:/config
       - /mnt/hdd/Movies:/movies
