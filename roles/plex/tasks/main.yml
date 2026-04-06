@@ -19,12 +19,15 @@
 - name: Start plex
   community.general.docker_container:
     name: plex
-    image: linuxserver/plex:1.41.6
+    image: linuxserver/plex:1.43.0
     restart_policy: unless-stopped
     restart: yes
     memory: 1024M
     network_mode: host
     state: stopped
+    privileged: true
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
     volumes:
       - /data/plex/config:/config
       - /mnt/hdd/Movies:/movies

@@ -30,7 +30,7 @@
 - name: start-resilio
   community.general.docker_container:
     name: resilio
-    image: lscr.io/linuxserver/resilio-sync:3.1.0.1073-1-ls220
+    image: lscr.io/linuxserver/resilio-sync:3.1.2
     restart_policy: unless-stopped
     restart: yes
     volumes:

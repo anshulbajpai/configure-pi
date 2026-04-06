@@ -23,7 +23,7 @@
     - portainer
     - pihole
     - resilio
-    # - plex
+    - plex
     # - gluetun
     # - nordlynx
     # - torrent
