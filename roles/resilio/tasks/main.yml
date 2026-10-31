@@ -46,6 +46,10 @@
       PGID: "{{ resilio_user.group }}"
       PUID: "{{ resilio_user.uid }}"
     container_default_behavior: compatibility
+    log_driver: local
+    log_options:
+      max-size: "10m"
+      max-file: "3"
 
 - name: allow-8888-in
   community.general.ufw:

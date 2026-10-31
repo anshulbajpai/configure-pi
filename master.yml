@@ -20,10 +20,10 @@
     - hdd
     - reboot
     - install_docker
-    - portainer
+    # - portainer
     - pihole
     - resilio
-    - plex
+    # - plex
     # - gluetun
     # - nordlynx
     # - torrent

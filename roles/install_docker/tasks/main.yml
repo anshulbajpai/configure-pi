@@ -43,3 +43,24 @@
     state: present
     update_cache: true
     force_apt_get: true
+
+- name: configure-docker-logging
+  ansible.builtin.copy:
+    dest: /etc/docker/daemon.json
+    content: |
+      {
+        "log-driver": "local",
+        "log-opts": {
+          "max-size": "10m",
+          "max-file": "3"
+        }
+      }
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart-docker
+
+- name: restart-docker
+  ansible.builtin.systemd_service:
+    name: docker
+    state: restarted
