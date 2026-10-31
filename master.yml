@@ -20,9 +20,9 @@
     - hdd
     - reboot
     - install_docker
-    # - portainer
+    - portainer
     - pihole
-    - resilio
+    # - resilio
     # - plex
     # - gluetun
     # - nordlynx
